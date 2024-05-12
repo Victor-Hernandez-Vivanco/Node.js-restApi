@@ -1,0 +1,55 @@
+npm init --y (crea el pakage.json) -> le indica al directorio que el proyecto va hecer uso de Node 
+
+npm install expess --save (crea node_module, package-lock.json) tambien agrega -> "expess": "^0.0.1-security" en las dependencias del package.json
+
+npm i cors  -save (le decimos a la app que haga uso de la libreria de cors para evitar el error de origen cruzado entre los navegadores)
+
+npm i dotenv -save (maneja las variables de entorno)
+
+npm i multer -save (maneja la carga de archivos ej mp3 ....)
+
+creamos directamente un archivo llamado .gitignore -> y le agregamos los archivos que no queremos subir a GitHub
+
+luego creamos un archivo llamado app.js o index.js 
+
+
+ejecutamos node app.js el resultado debe devolver el localhost con el puerto asignado
+
+** PS D:\Practicas_de_programacion\Js\ruta_Node_Js_Express> node app.js
+http://localhost:3000
+
+** posteriormente creamos un archivo .env para crear las variables de entorno, creamos la variable PORT=3000
+luego en app.ts realizamos la siguiente modificación
+
+require("dotenv").config() // agregamos esta linea de comando para decirle a la app que use las variables de entorno de .env
+const express = require("express") 
+const cors = require("cors") 
+const app = express()  
+
+app.use(cors())
+
+const port = process.env.PORT || 3000 // agregamos process.env.PORT para indicar que comienze por dicha variable de entorno del archivo .env
+
+app.listen(port, () => {
+    console.log(`http://localhost:${port}`)
+})
+
+*** Ahora generamos la estructiura de carpetas para el modelo MVC
+
+1.- Creamos la carpeta models
+2.- Creamos la carpeta controllers
+3.- Creamos la carpeta routes (es la Vista)
+4.- Creamos la carpeta config (es donde se almacenan funciones por ejemplo de conecciones en bbdd)
+5.- Creamos la carpeta utils (ayudantes para tareas repetitivas)
+6.- Creamos la carpeta storage (almacenamiento es decir la carga de archivos pdf, mp3 .....)
+
+** iniciamos el proyecto en GitHub con->  git init
+** instalamos el paquete de mongoose para el moor de BBDD MongooDB npm install mongoose -save
+
+** dentro de la carpeta config creamos un archivo mongo.ts para crear la coneccion con la BBDD Mongoo
+    declaramos el paquete de mongoose, declaramos un fincion flecha vacia para decir que esto se va a exportar
+    en el arvhivo .env declaramos la variable DB_URI con la url de la coneccion de mongo atlas
+    
+
+
+
