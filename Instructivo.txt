@@ -8,6 +8,8 @@ npm i dotenv -save (maneja las variables de entorno)
 
 npm i multer -save (maneja la carga de archivos ej mp3 ....)
 
+npm i nodemon -g  permite recargar la app cada vez que guardemos los cambios
+
 creamos directamente un archivo llamado .gitignore -> y le agregamos los archivos que no queremos subir a GitHub
 
 luego creamos un archivo llamado app.js o index.js 
@@ -53,7 +55,8 @@ app.listen(port, () => {
 *** Listo lo anterior comenzamos a declarar los modelos
 
 en la carpeta models creamos una sub carpeta llamada nosql(esta destinada para mongodb)donde se crea el esquema de la estructura de cada modelo 
-ejemplo el modelo para el user y el admin
+ejemplo el modelo para el user y el admin en users.js tambien creaos storage.js y tracks.js
 
 
 
+Ahora nos vamos a la carpeta routes y creamos la tres rutas users, tracks, storage

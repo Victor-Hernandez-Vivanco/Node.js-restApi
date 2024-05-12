@@ -1,23 +1,43 @@
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
+
+// http://localhost/tracks
 
 const TracksScheme = new mongoose.Schema(
     {
         name: {
             type: String
         },
-        age: {
+        album: {
             type: Number
         },
-        email: {
+        cover: {
             type: String,
-            unique:true
+            validator: (req) => {
+                return true;
+            },
+            message:"ERROR_URL"
         },
-        pasword: {
+        artist: {
+            name: {
             type: String
+            },
+            nickname: {
+                type: String
+            },
+            nationality: {
+                type: String
+            },
         },
-        role: {
-            type: ["user", "admin"],
-            default:"user",
+        duration: {
+            start: {
+                type: Number
+            },
+            end: {
+                type: String
+            },
+        },
+        mediaId: {
+            type: mongoose.Types.ObjectId,
         },
     },
     {

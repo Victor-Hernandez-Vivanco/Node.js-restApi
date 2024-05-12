@@ -1,5 +1,7 @@
 const mongoose = require("mongoose")
 
+// http://localhost/users
+
 const UserScheme = new mongoose.Schema(
     {
         name: {

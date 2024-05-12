@@ -1,4 +1,6 @@
-const { mongoose } = require("mongoose")
+const { mongoose } = require("mongoose");
+
+// http://localhost/storage
 
 const StorageSchema = new mongoose.Schema(
     {
