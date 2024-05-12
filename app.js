@@ -1,12 +1,16 @@
-require("dotenv").config()
-const express = require("express") 
-const cors = require("cors") 
-const app = express()  
+require("dotenv").config();
+const express = require("express");
+const cors = require("cors");
+const dbConnect = require("./config/mongo");
 
-app.use(cors())
+const app = express();
 
-const port = process.env.PORT || 3000
+app.use(cors());
+
+const port = process.env.PORT || 3000;
 
 app.listen(port, () => {
-    console.log(`http://localhost:${port}`)
-})
+  console.log(`Servidor iniciado en http://localhost:${port}`);
+});
+
+dbConnect();

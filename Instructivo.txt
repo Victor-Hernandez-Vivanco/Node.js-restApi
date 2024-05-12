@@ -44,12 +44,16 @@ app.listen(port, () => {
 6.- Creamos la carpeta storage (almacenamiento es decir la carga de archivos pdf, mp3 .....)
 
 ** iniciamos el proyecto en GitHub con->  git init
-** instalamos el paquete de mongoose para el moor de BBDD MongooDB npm install mongoose -save
+** instalamos el paquete de mongoose para el moor de BBDD MongooDB npm install mongoose -save --- npm i --save-dev @types/node
 
 ** dentro de la carpeta config creamos un archivo mongo.ts para crear la coneccion con la BBDD Mongoo
-    declaramos el paquete de mongoose, declaramos un fincion flecha vacia para decir que esto se va a exportar
-    en el arvhivo .env declaramos la variable DB_URI con la url de la coneccion de mongo atlas
+** dentro del .env creamos la variable DB_URI y le asignamos el puerto de conexión a las BBDD
     
+
+*** Listo lo anterior comenzamos a declarar los modelos
+
+en la carpeta models creamos una sub carpeta llamada nosql(esta destinada para mongodb)donde se crea el esquema de la estructura de cada modelo 
+ejemplo el modelo para el user y el admin
 
 
 
