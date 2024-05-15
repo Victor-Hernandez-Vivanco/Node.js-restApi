@@ -1,12 +1,24 @@
 const express = require("express");
 const router = express.Router();
+const customheder = require("../middleware/customHeader")
+const { validatorCreateItem, validatorGetItem } = require("../validators/tracks")
+const {getItems, getItem, createItem, updateItem, deleteItem} = require("../controllers/tracks")
 
-// http://localhost/tracks [GET, POST, PUT, DELETE]
+// http://localhost:3001/api/tracks [GET, POST, PUT, DELETE]
 
-router.get("/", (req, res) => {
-    const data =  ["Hola ", "mundo"] 
+// Crea un registro
+router.post("/", validatorCreateItem, createItem)
 
-    res.send({data})
-})
+// Lista los registros
+router.get("/", getItems)
 
-module.exports = router
+// Obtien los detalles de un item
+router.get("/:id", validatorGetItem, getItem)
+
+// Actualiza un registro
+router.put("/:id", validatorGetItem, validatorCreateItem, updateItem)
+
+// Elimina un registro
+router.delete("/:id", validatorGetItem, deleteItem)
+
+module.exports = router;

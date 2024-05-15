@@ -1,6 +1,5 @@
-const mongoose = require("mongoose")
-
-// http://localhost/users
+const mongoose = require("mongoose");
+const SoftDeleteModel = require("mongoose-delete");
 
 const UserScheme = new mongoose.Schema(
     {
@@ -15,7 +14,8 @@ const UserScheme = new mongoose.Schema(
             unique:true
         },
         pasword: {
-            type: String
+            type: String,
+            select:false
         },
         role: {
             type: ["user", "admin"],
@@ -27,5 +27,5 @@ const UserScheme = new mongoose.Schema(
         versionKey:false
     }
 )
-
-module.exports = mongoose.model("users", UserScheme)// se exporta el modelo de mongoose que contiene la tabla users
+UserScheme.plugin(SoftDeleteModel, { overrideMethods: 'all'});
+module.exports = mongoose.model("users", UserScheme);// se exporta el modelo de mongoose que contiene la tabla users

@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
-
-// http://localhost/tracks
+const SoftDeleteModel = require("mongoose-delete");
 
 const TracksScheme = new mongoose.Schema(
     {
@@ -8,7 +7,7 @@ const TracksScheme = new mongoose.Schema(
             type: String
         },
         album: {
-            type: Number
+            type: String
         },
         cover: {
             type: String,
@@ -46,4 +45,5 @@ const TracksScheme = new mongoose.Schema(
     }
 )
 
-module.exports = mongoose.model("tracks", TracksScheme)// se exporta el modelo de mongoose que contiene la tabla users
+TracksScheme.plugin(SoftDeleteModel, { overrideMethods: 'all'});
+module.exports = mongoose.model("tracks", TracksScheme);// se exporta el modelo de mongoose que contiene la tabla users

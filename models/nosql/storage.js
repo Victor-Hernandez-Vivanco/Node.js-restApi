@@ -1,6 +1,5 @@
-const { mongoose } = require("mongoose");
-
-// http://localhost/storage
+const mongoose = require("mongoose");
+const SoftDeleteModel = require("mongoose-delete");
 
 const StorageSchema = new mongoose.Schema(
     {
@@ -8,7 +7,7 @@ const StorageSchema = new mongoose.Schema(
             type: String,
         },
         filename: {
-            type: Number,
+            type: String,
         },
     },
     {
@@ -16,5 +15,5 @@ const StorageSchema = new mongoose.Schema(
         versionKey:false
     }
 )
-
-module.exports = mongoose.model("storage", StorageSchema)// se exporta el modelo de mongoose que contiene la tabla storage
+StorageSchema.plugin(SoftDeleteModel, { overrideMethods: 'all'});
+module.exports = mongoose.model("storages", StorageSchema);// se exporta el modelo de mongoose que contiene la tabla storage
