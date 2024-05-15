@@ -16,8 +16,9 @@ const createItem = async (req, res) => {
 // obtine la lista de los registros
 const getItems = async (req, res) => {
     try {
+        const user = req.user;
         const data = await tracksModel.find({})
-        res.send({ data })
+        res.send({ user, data})
     } catch (error) {
         handleHttpError(res, "ERROR_GET_ITEMS")
     }

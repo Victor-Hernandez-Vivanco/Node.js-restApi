@@ -1,13 +1,32 @@
 const bcryptjs = require("bcryptjs");
 
-const encrypt = async (passwordPlain) => { // encripta la passwor en en un hash
-    const hash = await bcryptjs.hash(passwordPlain, 10)
-    return hash;
+/**
+ * Función para encriptar la contraseña.
+ * @param {string} passwordPlain - Contraseña sin encriptar.
+ * @returns {Promise<string>} - Contraseña encriptada.
+ */
+const encrypt = async (passwordPlain) => {
+    try {
+        const hash = await bcryptjs.hash(passwordPlain, 10);
+        return hash;
+    } catch (error) {
+        throw new Error('Error en la encriptación de la contraseña.');
+    }
 };
 
-// pasar contraseña sin encripta y contraseña encriptada
-const compare = async (passwordPlain, hashPassword) => { // compara el hash con la clave 
-    return await bcryptjs.compare(passwordPlain, hashPassword)
+/**
+ * Función para comparar una contraseña en texto plano con un hash de contraseña encriptada.
+ * @param {string} passwordPlain - Contraseña en texto plano.
+ * @param {string} hashPassword - Hash de la contraseña encriptada.
+ * @returns {Promise<boolean>} - Verdadero si las contraseñas coinciden, falso si no.
+ */
+const compare = async (passwordPlain, hashPassword) => {
+    try {
+        const match = await bcryptjs.compare(passwordPlain, hashPassword);
+        return match;
+    } catch (error) {
+        throw new Error('Error al comparar las contraseñas.');
+    }
 };
 
 module.exports = { encrypt, compare };
