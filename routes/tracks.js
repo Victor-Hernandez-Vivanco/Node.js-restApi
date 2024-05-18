@@ -8,10 +8,10 @@ const {getItems, getItem, createItem, updateItem, deleteItem} = require("../cont
 // http://localhost:3001/api/tracks [GET, POST, PUT, DELETE]
 
 // Crea un registro
-router.post("/", authMiddleware,checkRol(["admin"]), validatorCreateItem, createItem)
+router.post("/", authMiddleware, validatorCreateItem, createItem)
 
 // Lista los registros
-router.get("/", authMiddleware , getItems)
+router.get("/", authMiddleware, checkRol(["admin"]) , getItems)
 
 // Obtien los detalles de un item
 router.get("/:id", authMiddleware,  validatorGetItem, getItem)
@@ -20,6 +20,6 @@ router.get("/:id", authMiddleware,  validatorGetItem, getItem)
 router.put("/:id", authMiddleware, validatorGetItem, validatorCreateItem, updateItem)
 
 // Elimina un registro
-router.delete("/:id", authMiddleware, validatorGetItem, deleteItem)
+router.delete("/:id", authMiddleware, validatorGetItem, checkRol(["admin"]),deleteItem)
 
 module.exports = router;
