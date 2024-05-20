@@ -2,48 +2,68 @@ const mongoose = require("mongoose");
 const SoftDeleteModel = require("mongoose-delete");
 
 const TracksScheme = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+    },
+    album: {
+      type: String,
+    },
+    cover: {
+      type: String,
+      validator: (req) => {
+        return true;
+      },
+      message: "ERROR_URL",
+    },
+    artist: {
+      name: {
+        type: String,
+      },
+      nickname: {
+        type: String,
+      },
+      nationality: {
+        type: String,
+      },
+    },
+    duration: {
+      start: {
+        type: Number,
+      },
+      end: {
+        type: String,
+      },
+    },
+    mediaId: {
+      type: mongoose.Types.ObjectId,
+    },
+  },
+  {
+    timestamps: true, // registra la fecha de create y update
+    versionKey: false,
+  }
+);
+
+// Traemos la url cuando se hace la busqueda de todos los item tracks
+// modelo padre tracks
+TracksScheme.statics.find = function find() {
+  const joinData = this.aggregate([
+    // modelo padre tracks
     {
-        name: {
-            type: String
-        },
-        album: {
-            type: String
-        },
-        cover: {
-            type: String,
-            validator: (req) => {
-                return true;
-            },
-            message:"ERROR_URL"
-        },
-        artist: {
-            name: {
-            type: String
-            },
-            nickname: {
-                type: String
-            },
-            nationality: {
-                type: String
-            },
-        },
-        duration: {
-            start: {
-                type: Number
-            },
-            end: {
-                type: String
-            },
-        },
-        mediaId: {
-            type: mongoose.Types.ObjectId,
-        },
+      $lookup: {
+        from: "storages", // desde el modelo padre se hace una relacion con storages
+        localField: "mediaId", // donde en el padre se utiliza mediaId
+        foreignField: "_id", // que lo relaciona con storage _id
+        as: "audio", // todo el resultado que consiga lo guarda en un alias llamado audio
+      },
     },
     {
-        timestamps: true, // registra la fecha de create y update
-        versionKey:false
-    }
-)
+      $unwind: "$audio",
+    },
+  ]);
+  return joinData;
+};
 
-TracksScheme.plugin(SoftDeleteModel, { overrideMethods: 'all'});
-module.exports = mongoose.model("tracks", TracksScheme);// se exporta el modelo de mongoose que contiene la tabla users
+TracksScheme.plugin(SoftDeleteModel, { overrideMethods: "all" });
+module.exports = mongoose.model("tracks", TracksScheme); // se exporta el modelo de mongoose que contiene la tabla users

@@ -6,12 +6,12 @@ const bcryptjs = require("bcryptjs");
  * @returns {Promise<string>} - Contraseña encriptada.
  */
 const encrypt = async (passwordPlain) => {
-    try {
-        const hash = await bcryptjs.hash(passwordPlain, 10);
-        return hash;
-    } catch (error) {
-        throw new Error('Error en la encriptación de la contraseña.');
-    }
+  try {
+    const hash = await bcryptjs.hash(passwordPlain, 10);
+    return hash;
+  } catch (error) {
+    throw new Error("Error en la encriptación de la contraseña.");
+  }
 };
 
 /**
@@ -21,12 +21,12 @@ const encrypt = async (passwordPlain) => {
  * @returns {Promise<boolean>} - Verdadero si las contraseñas coinciden, falso si no.
  */
 const compare = async (passwordPlain, hashPassword) => {
-    try {
-        const match = await bcryptjs.compare(passwordPlain, hashPassword);
-        return match;
-    } catch (error) {
-        throw new Error('Error al comparar las contraseñas.');
-    }
+  try {
+    const match = await bcryptjs.compare(passwordPlain, hashPassword);
+    return match;
+  } catch (error) {
+    throw new Error("Error al comparar las contraseñas.");
+  }
 };
 
 module.exports = { encrypt, compare };

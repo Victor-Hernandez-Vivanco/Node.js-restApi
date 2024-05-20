@@ -3,13 +3,12 @@ const { loginCtrl, registerCtrl } = require("../controllers/auth");
 const router = express.Router();
 const { validatorRegister, validatorLogin } = require("../validators/auth");
 
+// Crea un usuario
 // http://localhost:3001/api/auth/register
+router.post("/register", validatorRegister, registerCtrl);
 
-// Crea un registro
-router.post("/register", validatorRegister, registerCtrl );
-
-
+// Logea un usuario
 // http://localhost:3001/api/auth/login
-router.post("/login", validatorLogin, loginCtrl );
+router.post("/login", validatorLogin, loginCtrl);
 
 module.exports = router;
