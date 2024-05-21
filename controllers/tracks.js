@@ -17,20 +17,22 @@ const createItem = async (req, res) => {
 const getItems = async (req, res) => {
   try {
     const user = req.user; // user del midleware session, es decir del usuario que esta logeado haciendo la solicitud
-    const data = await tracksModel.find({}); // Llama al método search para obtener los elementos
+    console.log(user);
+    const data = await tracksModel.findAllData({}); // Llama al método search para obtener los elementos
     res.send({ data, user }); // Envía los datos correctamente formateados
   } catch (error) {
     handleHttpError(res, "ERROR_GET_ITEMS"); // Maneja el error con handleHttpError
   }
 };
 
-//obtener un registro por su id
+// Obtener un registro por su id
 const getItem = async (req, res) => {
   try {
     const user = req.user; // user del midleware session, es decir del usuario que esta logeado haciendo la solicitud
     req = matchedData(req);
     const { id } = req;
-    const data = await tracksModel.findById(id);
+    const data = await tracksModel.findOneData(id);
+    console.log("esta es la data -> ", data);
     res.send({ data, user });
   } catch (error) {
     handleHttpError(res, "ERROR_GET_ITEM");

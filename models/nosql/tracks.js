@@ -11,10 +11,10 @@ const TracksScheme = new mongoose.Schema(
     },
     cover: {
       type: String,
-      validator: (req) => {
-        return true;
+      validate: {
+        validator: (req) => true,
+        message: "ERROR_URL",
       },
-      message: "ERROR_URL",
     },
     artist: {
       name: {
@@ -45,9 +45,12 @@ const TracksScheme = new mongoose.Schema(
   }
 );
 
-// Traemos la url cuando se hace la busqueda de todos los item tracks
-// modelo padre tracks
-TracksScheme.statics.find = function find() {
+/**
+ * Este metodo hace una relacion para que vengan
+ * todos los datos, incluyendo la url del archivo
+ * @returns
+ */
+TracksScheme.statics.findAllData = function () {
   const joinData = this.aggregate([
     // modelo padre tracks
     {
@@ -63,6 +66,29 @@ TracksScheme.statics.find = function find() {
     },
   ]);
   return joinData;
+};
+
+/**
+ * Metodo por ID
+ * Este metodo trae un archivo por su id,
+ * incluyendo su url
+ * @returns
+ */
+TracksScheme.statics.findOneData = function (id) {
+  return this.aggregate([
+    {
+      $match: { _id: new mongoose.isValidObjectId(id) },
+    },
+    {
+      $lookup: {
+        from: "storages",
+        localField: "mediaId",
+        foreignField: "_id",
+        as: "audio",
+      },
+    },
+    { $unwind: "$audio" },
+  ]);
 };
 
 TracksScheme.plugin(SoftDeleteModel, { overrideMethods: "all" });

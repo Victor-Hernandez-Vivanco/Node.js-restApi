@@ -20,19 +20,19 @@ const {
 router.post(
   "/",
   authMiddleware,
-  checkRol(["admin"]),
+  checkRol(["user", "admin"]),
   validatorCreateItem,
   createItem
 );
 
-// Lista los registros
-router.get("/", authMiddleware, checkRol(["admin"]), getItems);
+// Lista todos los registros
+router.get("/", authMiddleware, checkRol(["user", "admin"]), getItems);
 
 // Obtien los detalles de un item
 router.get(
   "/:id",
   authMiddleware,
-  checkRol(["user"]),
+  checkRol(["user", "admin"]),
   validatorGetItem,
   getItem
 );
@@ -41,7 +41,7 @@ router.get(
 router.put(
   "/:id",
   authMiddleware,
-  checkRol(["user"]),
+  checkRol(["user", "admin"]),
   validatorGetItem,
   validatorCreateItem,
   updateItem
@@ -51,7 +51,7 @@ router.put(
 router.delete(
   "/:id",
   authMiddleware,
-  checkRol(["admin"]),
+  checkRol(["user", "admin"]),
   validatorGetItem,
   deleteItem
 );

@@ -25,13 +25,13 @@ const authMiddleware = async (req, res, next) => {
       [propertiesKey.id]: dataToken[propertiesKey.id],
     };
 
-    // const user = await usersModel.findOne(query);
-    // req.user = user;
+    const user = await usersModel.findOne(query);
+    req.user = user;
 
     /** este se usa cuando estas conectado
      * a nosql y se quiere hacer una inserción de tracks */
-    const user = await usersModel.findById(dataToken._id);
-    req.user = user;
+    // const user = await usersModel.findById(dataToken._id);
+    // req.user = user;
 
     next();
   } catch (error) {

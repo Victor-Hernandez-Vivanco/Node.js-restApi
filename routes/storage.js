@@ -18,12 +18,12 @@ router.post(
   "/",
   uploadMiddleware.single("myfile"),
   authMiddleware,
-  checkRol(["admin"]),
+  checkRol(["user", "admin"]),
   createItem
 );
 
 // Obtiene la laista de items
-router.get("/", authMiddleware, checkRol(["admin"]), getItems);
+router.get("/", authMiddleware, checkRol(["user", "admin"]), getItems);
 
 //Obtiene el detalle de un item
 router.get(
