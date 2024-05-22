@@ -10,10 +10,10 @@ const User = sequelize.define(
     },
     age: {
       type: DataTypes.NUMBER,
-      unique: true,
     },
     email: {
       type: DataTypes.STRING,
+      unique: false,
     },
     password: {
       type: DataTypes.STRING,

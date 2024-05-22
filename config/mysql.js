@@ -16,9 +16,9 @@ const sequelize = new Sequelize(database, username, password, {
 const dbConnectMySql = async () => {
   try {
     await sequelize.authenticate();
-    console.log("MYSQL CONECCION EXITOSA");
+    console.log("MYSQL_CONEXION_READY");
   } catch (error) {
-    console.log("MYSQL ERROR DE CONECCION", error);
+    console.log("MYSQL_ERROR_CONEXION", error);
   }
 };
 

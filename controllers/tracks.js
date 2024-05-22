@@ -9,19 +9,20 @@ const createItem = async (req, res) => {
     const data = await tracksModel.create(body);
     res.send({ data });
   } catch (error) {
-    handleHttpError(res, "ERROR_CREATE_ITEM");
+    handleHttpError(res, "ERROR_CREATE_ITEM_TRACKS");
   }
 };
 
-// obtener todos los registros
+// // obtener todos los registros
 const getItems = async (req, res) => {
   try {
     const user = req.user; // user del midleware session, es decir del usuario que esta logeado haciendo la solicitud
-    console.log(user);
-    const data = await tracksModel.findAllData({}); // Llama al método search para obtener los elementos
-    res.send({ data, user }); // Envía los datos correctamente formateados
+    console.log("Este es el user -> ", user);
+    const data = await tracksModel.findAllData({}); // Llama al método findAllData para obtener los elementos
+    console.log("Esta es la data -> ", data);
+    res.send({ data, user });
   } catch (error) {
-    handleHttpError(res, "ERROR_GET_ITEMS"); // Maneja el error con handleHttpError
+    handleHttpError(res, "ERROR_GET_ITEMS_TRACKS");
   }
 };
 
@@ -31,11 +32,11 @@ const getItem = async (req, res) => {
     const user = req.user; // user del midleware session, es decir del usuario que esta logeado haciendo la solicitud
     req = matchedData(req);
     const { id } = req;
-    const data = await tracksModel.findOneData(id);
+    const data = await tracksModel.findOneData({ id });
     console.log("esta es la data -> ", data);
     res.send({ data, user });
   } catch (error) {
-    handleHttpError(res, "ERROR_GET_ITEM");
+    handleHttpError(res, "ERROR_GET_ITEM_TRACKS");
   }
 };
 
@@ -46,7 +47,7 @@ const updateItem = async (req, res) => {
     const data = await tracksModel.findOneAndUpdate({ _id: id }, body);
     res.send({ data });
   } catch (error) {
-    handleHttpError(res, "ERROR_UPDATE_ITEMS");
+    handleHttpError(res, "ERROR_UPDATE_ITEMS_TRACKS");
     console.log(error);
   }
 };
@@ -59,7 +60,7 @@ const deleteItem = async (req, res) => {
     const data = await tracksModel.delete({ _id: id });
     res.send({ data });
   } catch (error) {
-    handleHttpError(res, "ERROR_DELETE_ITEM");
+    handleHttpError(res, "ERROR_DELETE_ITEM_TRACKS");
   }
 };
 

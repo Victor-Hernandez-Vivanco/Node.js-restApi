@@ -29,7 +29,7 @@ router.get("/", authMiddleware, checkRol(["user", "admin"]), getItems);
 router.get(
   "/:id",
   authMiddleware,
-  checkRol(["user"]),
+  checkRol(["user", "admin"]),
   validatorGetItem,
   getItem
 );
@@ -38,7 +38,7 @@ router.get(
 router.delete(
   "/:id",
   authMiddleware,
-  checkRol(["admin"]),
+  checkRol(["user", "admin"]),
   validatorGetItem,
   deleteItem
 );

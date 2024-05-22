@@ -2,6 +2,12 @@ const jwt = require("jsonwebtoken");
 const getProperties = require("../utils/handlePropertiesEngine");
 const propertiesKey = getProperties();
 
+/**
+ * Firma del token por parte del backend
+ * @param {*} user
+ * @param {*} JWT_SECRET
+ * @returns
+ */
 const tokenSign = async (user, JWT_SECRET) => {
   const sign = jwt.sign(
     {

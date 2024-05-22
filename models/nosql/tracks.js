@@ -77,7 +77,7 @@ TracksScheme.statics.findAllData = function () {
 TracksScheme.statics.findOneData = function (id) {
   return this.aggregate([
     {
-      $match: { _id: new mongoose.isValidObjectId(id) },
+      $match: { _id: new mongoose.Types.ObjectId(id) }, // mongoose.Types.ObjectId(id) pronto quedara obsoleto OJO
     },
     {
       $lookup: {

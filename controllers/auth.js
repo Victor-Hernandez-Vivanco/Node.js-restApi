@@ -47,9 +47,9 @@ const registerCtrl = async (req, res) => {
 const loginCtrl = async (req, res) => {
   try {
     req = matchedData(req);
-    const user = await usersModel
-      .findOne({ email: req.email })
-      .select("password name role email"); // cuando se conecte a mysql hay que bloquear esta linea de codigo
+    const user = await usersModel.findOne({ email: req.email });
+    //.select("password name role email"); // cuando se conecte a mysql hay que bloquear esta linea de codigo
+    console.log("usuario logeado ->", user);
     if (!user) {
       handleHttpError(res, "USER_NOT_EXIST", 404);
       return;

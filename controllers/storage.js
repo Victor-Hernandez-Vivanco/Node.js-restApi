@@ -11,7 +11,7 @@ const createItem = async (req, res) => {
   try {
     const { file } = req;
     if (!file) {
-      handleHttpError(res, "FILE_NOT_FOUND", 400);
+      handleHttpError(res, "FILE_NOT_FOUND_STORAGE", 404);
       return;
     }
 
@@ -24,7 +24,7 @@ const createItem = async (req, res) => {
     res.send({ response });
   } catch (error) {
     console.error(error);
-    handleHttpError(res, "ERROR_CREATE_ITEM");
+    handleHttpError(res, "ERROR_CREATE_ITEM_STORAGE");
   }
 };
 
@@ -34,7 +34,7 @@ const getItems = async (req, res) => {
     const data = await storageModel.find({});
     res.send({ data });
   } catch (error) {
-    handleHttpError(res, "ERROR_LIST_ITEMS");
+    handleHttpError(res, "ERROR_LIST_ITEMS_ STORAGE");
   }
 };
 
@@ -45,7 +45,7 @@ const getItem = async (req, res) => {
     const data = await storageModel.findById(id);
     res.send({ data });
   } catch (error) {
-    handleHttpError(res, "ERROR_DETAIL_ITEM");
+    handleHttpError(res, "ERROR_DETAIL_ITEM_STORAGE");
   }
 };
 
@@ -66,7 +66,7 @@ const deleteItem = async (req, res) => {
     };
     res.send({ data });
   } catch (error) {
-    handleHttpError(res, "ERROR_DELETE_ITEM");
+    handleHttpError(res, "ERROR_DELETE_ITEM_STORAGE");
   }
 };
 

@@ -29,7 +29,7 @@ const authMiddleware = async (req, res, next) => {
     req.user = user;
 
     /** este se usa cuando estas conectado
-     * a nosql y se quiere hacer una inserción de tracks */
+     * a MONGO y se quiere hacer una inserción de tracks */
     // const user = await usersModel.findById(dataToken._id);
     // req.user = user;
 

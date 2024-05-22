@@ -42,6 +42,4 @@ app.listen(port, () => {
   console.log(`Servidor iniciado en http://localhost:${port}`);
 });
 
-//dbConnectNoSql();
-
 ENGINE_DB === "nosql" ? dbConnectNoSql() : dbConnectMySql();
